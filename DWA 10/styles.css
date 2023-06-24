@@ -94,3 +94,12 @@ border-bottom: 1px solid var(--color-light-grey);}
 .footer__link {
     color: var(--color-white);
 }
+
+.reset {
+    width: 100%;
+
+}
+.reset-overlay{
+    text-align: center;
+    color: #33333d
+}

@@ -12,6 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.0/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.0/cdn/shoelace-autoloader.js"></script>
     <script src="/DWA 10/js/scripts.js" defer></script>
   </head>
 
@@ -44,6 +46,8 @@
         <button data-key="substract" class="counter__button counter__button_first">-</button>
         <button data-key="add" class="counter__button">+</button>
       </div>
+      <sl-button class="reset" variant="neutral" size="large" data-key="reset-button">Reset</sl-button>
+      <sl-dialog class="reset-overlay" data-key="reset-overlay" >The value will be reset to 0</sl-dialog>
     </main>
     <footer class="footer">
       Inspire by
