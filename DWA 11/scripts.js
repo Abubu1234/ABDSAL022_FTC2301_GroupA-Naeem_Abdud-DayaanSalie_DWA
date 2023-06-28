@@ -1,103 +1,153 @@
-// Constants for configuring the counter app
-const MAX_NUMBER = 10;
-const MIN_NUMBER = -5;
-const STEP_AMOUNT = 1;
-const RESET_AMOUNT = 0;
+/**
+ * The initial state of the application
+ * 
+ * @typedef {Object} InitialState
+ * @property {number} count - The count value
+ */
 
-// DOM elements
-const number = document.querySelector('[data-key="number"]');
-const subtract = document.querySelector('[data-key="subtract"]');
-const add = document.querySelector('[data-key="add"]');
-const reset = document.querySelector('[data-key="reset"]');
+/**
+ * The action type for the reducer
+ * 
+ * @typedef {('ADD' | 'SUBTRACT' | 'RESET')} ActionType
+ */
 
-console.log(number, subtract, add); // Logging the DOM elements for verification
+/**
+ * The reducer function that handles state updates.
+ *
+ * @typedef {function} Reducer
+ * @param {InitialState} state 
+ * @param {Object} action 
+ * @param {ActionType} action.type
+ * @returns {InitialState} 
+ */
 
-// Event handler for subtract button click
-const subtractHandler = () => {
-  // Dispatch 'DECREMENT' action to the store
-  store.dispatch({ type: 'DECREMENT' });
-  console.log(store.getState());
+/**
+ * The store object that holds the state and manages state updates.
+ *
+ * @typedef {Object} Store
+ * @property {InitialState} state 
+ * @property {Array<function>} listeners 
+ * @property {function} getState 
+ * @property {function} dispatch 
+ * @property {function} subscribe
+ */
 
-  // Update the counter value displayed in the DOM
-  const newValue = parseInt(number.value) - STEP_AMOUNT;
-  number.value = newValue;
-
-  // Manage the enabled/disabled state of add and subtract buttons
-  if (add.disabled === true) {
-    add.disabled = false;
-  }
-
-  if (newValue <= MIN_NUMBER) {
-    subtract.disabled = true;
-  }
+/**
+ * Initialises the HTML elements used in the application
+ * 
+ * @type {HtmlElements}
+ */
+const html = {
+  header: {
+    settings: document.querySelector('[data-header-settings]'),
+  },
+  settings: {
+    overlay: document.querySelector('[data-settings-overlay]'),
+    form: document.querySelector('[data-settings-form]'),
+  },
+  key: {
+    number: document.querySelector('[data-key="number"]'),
+    subtract: document.querySelector('[data-key="subtract"]'),
+    add: document.querySelector('[data-key="add"]'),
+    reset: document.querySelector('[data-key="reset"]'),
+  },
+  reset: {
+    overlay: document.querySelector('[data-reset-overlay]'),
+  },
 };
 
-// Event handler for add button click
-const addHandler = () => {
-  // Dispatch 'INCREMENT' action to the store
-  store.dispatch({ type: 'INCREMENT' });
-  console.log(store.getState());
-
-  // Update the counter value displayed in the DOM
-  const newValue = parseInt(number.value) + STEP_AMOUNT;
-  number.value = newValue;
-
-  // Manage the enabled/disabled state of add and subtract buttons
-  if (subtract.disabled === true) {
-    subtract.disabled = false;
-  }
-
-  if (newValue >= MAX_NUMBER) {
-    add.disabled = true;
-  }
+/**
+ * The initial state of the application
+ * 
+ * @type {InitialState}
+ */
+const initialState = {
+  count: 1,
 };
 
-// Event handler for reset button click
-const resetHandler = () => {
-  // Dispatch 'RESET' action to the store
-  store.dispatch({ type: 'RESET' });
-  console.log(store.getState());
-
-  // Reset the counter value displayed in the DOM
-  const resetValue = parseInt(number.value);
-  if (resetValue !== RESET_AMOUNT) {
-    number.value = RESET_AMOUNT;
-    alert("You have reset your tally amount to 0!");
-  }
-};
-
-
-
-// Reducer function for updating the state
-const counterReducer = (state = 0, action) => {
+/**
+ * The reducer function that handles state updates
+ * 
+ * @type {Reducer} 
+ */
+function reducer(state, action) {
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
+    case 'ADD':
+      return {
+        count: state.count + 1,
+      };
+    case 'SUBTRACT':
+      return {
+        count: state.count - 1,
+      };
     case 'RESET':
-      return 0;
+      return {
+        count: 0,
+      };
     default:
       return state;
   }
+}
+
+/**
+ * The store object that holds the state and manages state updates
+ * 
+ * @type {Store}
+ */
+const store = {
+  state: initialState,
+  listeners: [],
+  /**
+   * Gets the current state
+   * @returns {InitialState}
+   */
+  getState() {
+    return this.state;
+  },
+  /**
+   * Dispatches an action and updates the state
+   * @param {Object} action 
+   */
+  dispatch(action) {
+    this.state = reducer(this.state, action);
+    this.listeners.forEach((listener) => listener(this.state));
+  },
+  /**
+   * Subscribes a listener function to the store for state changes
+   * @param {function} listener 
+   */
+  subscribe(listener) {
+    this.listeners.push(listener);
+  },
 };
 
-// Create the store
-const createStore = (reducer) => {
-  let state = reducer(undefined, {}); // Initialize the state from reducer 
+/**
+ * Logs the new state to the console
+ * @param {InitialState} state
+ */
+store.subscribe((state) => {
+  // eslint-disable-next-line no-console
+  console.log('New state:', state);
+});
 
-  const getState = () => state; //returns the current state
+/**
+ * Event listener for the subtract key
+ */
+html.key.subtract.addEventListener('click', () => {
+  store.dispatch({ type: 'SUBTRACT' });
+});
 
-  const dispatch = (action) => {
-    state = reducer(state, action); //when dispathc is called it uses the reducer of the current state and action 
-  };
+/**
+ * Event listener for the add key
+ */
+html.key.add.addEventListener('click', () => {
+  store.dispatch({ type: 'ADD' })
+  ;
+});
 
-  return { getState, dispatch };
-};
-
-const store = createStore(counterReducer);
-
-// Event listeners for button clicks
-subtract.addEventListener('click', subtractHandler);
-add.addEventListener('click', addHandler);
-reset.addEventListener('click', resetHandler);
+/**
+ * Event listener for the reset key
+ */
+html.key.reset.addEventListener('click', () => {
+  store.dispatch({ type: 'RESET' });
+});
