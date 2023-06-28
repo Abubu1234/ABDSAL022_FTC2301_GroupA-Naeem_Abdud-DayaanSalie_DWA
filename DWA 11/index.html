@@ -1,61 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tally App</title>
 
-    <script
-      type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js" defer
-    ></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"
-    />
-    <script src="https://kit.fontawesome.com/e223308f2e.js" crossorigin="anonymous" defer
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.1/redux.min.js"></script>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="scripts.js" type="module" defer></script>
-  </head>
-  <body>
-    <header>
-      <h1> Tally Counter</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tally Count</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.0/cdn/themes/light.css" />
+    <script src="scripts.js" defer></script>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1 class="header_title">
+            Tally Count
+        </h1>
+        <sl-avatar label="User avatar"></sl-avatar>
+
     </header>
-    <main>
+    
 
-        <input
-          data-key="number"
-          readonly
-          value="0"
-          class="counter__value"
-          size="large"
-        />
-
-        <div class="counter__actions">
-          <sl-icon-button
-            data-key="subtract"
-            name="dash-circle"
-            class="counter__button"
-          ></sl-icon-button>
-
-          <sl-icon-button
-            data-key="add"
-            name="plus-circle"
-            class="counter__button"
-          ></sl-icon-button>
-
+    <main class="counter">
+        <input data-key="number" class="counter_value" readonly value="0" />
+        <div class="counter_actions">
+            <sl-button data-key="subtract" size='large' class="counter_button counter_button_first button">-</sl-button>
+            <sl-button data-key="add" size='large' class="counter_button button">+</sl-button>
         </div>
-
-        <div class="reset_actions">
-          <button data-key="reset" class="reset_button">reset</button>
-        </div>
-
+        <sl-button data-key="reset" variant="neutral" class="reset">Reset</sl-button>
     </main>
-    <footer>
-      <p>Inspired by<a class="footer__link" href="https://tallycount.app/">Tally Count</a>.</p>
+
+    <footer class="footer">
+        Inspired By <a class="footer_link" href="https://tallycount.app/">Tally Count</a>. Note this is a student
+        practice project for learning
+        JavaScript.
     </footer>
-  </body>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.0/cdn/shoelace-autoloader.js"></script> 
+</body>
+
 </html>
