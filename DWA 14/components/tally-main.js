@@ -79,7 +79,7 @@ class TallyMain extends LitElement {
   }
 
   decrement() {
-    if (this.count > -1) {
+    if (this.count > -10) {
       this.count -= 1;
       this.minReached = false;
       this.maxReached = false;
