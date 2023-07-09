@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Lesego T. Chiloane">
-  <meta name="description" content="My own implementation of the Tally Counter App">
-  <script src="./script.js" type="module" defer></script>
-  <script src="https://kit.fontawesome.com/0b821e41f3.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Permanent+Marker&display=swap" rel="stylesheet">
-  <title>Tally App</title>
-</head>
-<body>
-  <header>
-    <nav class="header__nav">
-      <div>
-        <img class="icon" src="icon/tallymarks.png" alt="tally-counter icon">
-      </div>
-      <div class="header__nav_name">Tally Counter</div>
-      <display-toggle></display-toggle>
-    </nav>
-  </header>
-  <my-counter></my-counter>
-</body>
+<html lang="en" class="sl-theme-dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tally App</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/themes/dark.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/shoelace-autoloader.js"
+      defer
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="scripts.js" type="module" defer></script>
+  </head>
+  <body>
+    <tally-app></tally-app>
+  </body>
 </html>
